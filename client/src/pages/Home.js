@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { v4 as uuidV4 } from 'uuid';
 import toast from 'react-hot-toast';
@@ -8,29 +7,21 @@ import axios from 'axios';
 
 const Home = () => {
     const navigate = useNavigate();
-    
-
-
-
-    
-  const handleLogout = async () => {
-    try {
-      const backendUrl = process.env.REACT_APP_BACKEND_URL || 'http://localhost:4000';
-      await axios.get(`${backendUrl}/api/v1/auth/logout`, {
-        withCredentials: true,
-      });
-      navigate("/login");
-    } catch (err) {
-      console.error("Logout failed:", err);
-    }
-  };
-
-
-
-
-
     const [roomId, setRoomId] = useState('');
     const [username, setUsername] = useState('');
+
+    const handleLogout = async () => {
+        try {
+            const backendUrl = process.env.REACT_APP_BACKEND_URL || 'http://localhost:4000';
+            await axios.post(`${backendUrl}/api/v1/auth/logout`, {}, {
+                withCredentials: true,
+            });
+            navigate("/login");
+        } catch (err) {
+            console.error("Logout failed:", err);
+            navigate("/login");
+        }
+    };
 
     const createNewRoom = (e) => {
         e.preventDefault();
@@ -44,8 +35,6 @@ const Home = () => {
             toast.error('ROOM ID & username is required');
             return;
         }
-
-        // Redirect to editor with room ID and username
         navigate(`/editor/${roomId}`, {
             state: {
                 username,
@@ -90,17 +79,13 @@ const Home = () => {
                     </button>
                     <span className="createInfo">
                         If you don't have a room ID, create &nbsp;
-                        <a
-                            onClick={createNewRoom}
-                            href="#"
-                            className="createNewBtn"
-                        >
+                        <a onClick={createNewRoom} href="#" className="createNewBtn">
                             new room
                         </a>
                     </span>
                     <button onClick={handleLogout} className="btn logoutBtn">
-                      Logout
-                      </button>
+                        Logout
+                    </button>
                 </div>
             </div>
         </div>
