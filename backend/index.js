@@ -19,6 +19,7 @@ const io = new Server(server, {
             "http://localhost:3000",
             "http://localhost:5000",
             "https://code-sync-part-1-1.onrender.com"
+            "https://synccode-frontend-dhg7.onrender.com"
         ],
         methods: ["GET", "POST"],
         credentials: true
@@ -31,6 +32,7 @@ app.use(cors({
         "http://localhost:3000",
         "http://localhost:5000",
         "https://code-sync-part-1-1.onrender.com"
+        "https://synccode-frontend-dhg7.onrender.com"
     ],
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
