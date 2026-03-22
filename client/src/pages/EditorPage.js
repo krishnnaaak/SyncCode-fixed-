@@ -211,6 +211,9 @@ const EditorPage = () => {
                             editorRef.current = editor;
                             editor.setSize(null, 'calc(100vh - 91px)'); // ✅ Explicit height
                             editor.refresh();
+                             // ✅ Fix mouse scroll
+                            editor.on('mousedown', () => editor.focus());
+                            editor.getScrollerElement().style.overflowY = 'scroll';
                         }}
                         onBeforeChange={(editor, data, value) => handleCodeChange(value)}
                     />
